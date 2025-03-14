@@ -103,7 +103,7 @@ export default function Footer() {
                   href="/shipping"
                   className="text-gray-400 hover:text-purple-400"
                 >
-                  Shipping Info
+                  Shipping Information
                 </Link>
               </li>
               <li>

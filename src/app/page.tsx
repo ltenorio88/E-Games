@@ -139,9 +139,9 @@ export default async function Home() {
     {
       id: 1,
       title: "Summer Gaming Sale",
-      description: "Up to 70% off on selected titles",
+      description: "Up to 50% off on the latest games and accessories",
       image:
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
+        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1200&q=80",
       cta: "Shop Now",
       link: "/category/games",
     },
@@ -166,12 +166,17 @@ export default async function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
 
       {/* Banner Carousel Section */}
       <section className="relative overflow-hidden">
-        <Carousel className="w-full" opts={{ loop: true, duration: 1500 }}>
+        <Carousel
+          className="w-full"
+          opts={{ loop: true, align: "start" }}
+          autoplay={true}
+          interval={5000}
+        >
           <CarouselContent>
             {bannerPromotions.map((promo) => (
               <CarouselItem key={promo.id}>
@@ -211,14 +216,14 @@ export default async function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gray-800">
+      <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center">
-            Shop By Category
+            Browse Categories
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Link href="/category/games" className="group">
-              <div className="bg-gray-700 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
+              <div className="bg-gray-800 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
                 <Gamepad2 className="w-16 h-16 mx-auto mb-4 text-purple-400 group-hover:text-white" />
                 <h3 className="text-2xl font-semibold">Games</h3>
                 <p className="mt-2 text-gray-300">
@@ -227,17 +232,17 @@ export default async function Home() {
               </div>
             </Link>
             <Link href="/category/collectibles" className="group">
-              <div className="bg-gray-700 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
+              <div className="bg-gray-800 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
                 <Trophy className="w-16 h-16 mx-auto mb-4 text-purple-400 group-hover:text-white" />
                 <h3 className="text-2xl font-semibold">Collectibles</h3>
-                <p className="mt-2 text-gray-300">Figurines, cards, and more</p>
+                <p className="mt-2 text-gray-300">Figures, cards, and more</p>
               </div>
             </Link>
             <Link href="/category/apparel" className="group">
-              <div className="bg-gray-700 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
+              <div className="bg-gray-800 rounded-xl p-8 text-center transition-all hover:bg-purple-700 hover:shadow-xl">
                 <Shirt className="w-16 h-16 mx-auto mb-4 text-purple-400 group-hover:text-white" />
                 <h3 className="text-2xl font-semibold">Apparel</h3>
-                <p className="mt-2 text-gray-300">Wear your passion</p>
+                <p className="mt-2 text-gray-300">Gaming-inspired clothing</p>
               </div>
             </Link>
           </div>
@@ -245,7 +250,7 @@ export default async function Home() {
       </section>
 
       {/* Featured Games Section */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Featured Games</h2>
@@ -261,21 +266,27 @@ export default async function Home() {
             {featuredGames.map((product) => (
               <div
                 key={product.id}
-                className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <Link href={`/product/${product.id}`}>
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </Link>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
+                  <Link href={`/product/${product.id}`}>
+                    <h3 className="font-semibold text-lg mb-1 hover:text-purple-400 transition-colors">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <div className="flex justify-between items-center">
                     <span className="text-purple-400 font-bold">
-                      ${product.price}
+                      ${product.price.toFixed(2)}
                     </span>
                     <Button
                       size="sm"
@@ -293,10 +304,10 @@ export default async function Home() {
       </section>
 
       {/* Featured Collectibles Section */}
-      <section className="py-16 bg-gray-800">
+      <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold">Collectibles</h2>
+            <h2 className="text-2xl font-bold">Featured Collectibles</h2>
             <Link
               href="/category/collectibles"
               className="text-purple-400 hover:text-purple-300 flex items-center"
@@ -311,19 +322,25 @@ export default async function Home() {
                 key={product.id}
                 className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <Link href={`/product/${product.id}`}>
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </Link>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
+                  <Link href={`/product/${product.id}`}>
+                    <h3 className="font-semibold text-lg mb-1 hover:text-purple-400 transition-colors">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <div className="flex justify-between items-center">
                     <span className="text-purple-400 font-bold">
-                      ${product.price}
+                      ${product.price.toFixed(2)}
                     </span>
                     <Button
                       size="sm"
@@ -341,10 +358,10 @@ export default async function Home() {
       </section>
 
       {/* Featured Apparel Section */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold">Apparel</h2>
+            <h2 className="text-2xl font-bold">Featured Apparel</h2>
             <Link
               href="/category/apparel"
               className="text-purple-400 hover:text-purple-300 flex items-center"
@@ -357,21 +374,27 @@ export default async function Home() {
             {featuredApparel.map((product) => (
               <div
                 key={product.id}
-                className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <Link href={`/product/${product.id}`}>
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </Link>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
+                  <Link href={`/product/${product.id}`}>
+                    <h3 className="font-semibold text-lg mb-1 hover:text-purple-400 transition-colors">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <div className="flex justify-between items-center">
                     <span className="text-purple-400 font-bold">
-                      ${product.price}
+                      ${product.price.toFixed(2)}
                     </span>
                     <Button
                       size="sm"
@@ -388,54 +411,12 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-gray-800">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Why Shop With Us
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Truck className="w-10 h-10" />,
-                title: "Fast Shipping",
-                description: "Free shipping on orders over $50",
-              },
-              {
-                icon: <CreditCard className="w-10 h-10" />,
-                title: "Secure Payment",
-                description: "Multiple payment options",
-              },
-              {
-                icon: <Star className="w-10 h-10" />,
-                title: "Loyalty Rewards",
-                description: "Earn points with every purchase",
-              },
-              {
-                icon: <ShoppingCart className="w-10 h-10" />,
-                title: "Easy Returns",
-                description: "30-day money back guarantee",
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="p-6 bg-gray-700 rounded-xl hover:shadow-md transition-shadow"
-              >
-                <div className="text-purple-400 mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-purple-700">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Join Our Gaming Community</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Sign up for exclusive deals, early access to new releases, and
+            Sign up for exclusive offers, early access to new releases, and
             special events.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
