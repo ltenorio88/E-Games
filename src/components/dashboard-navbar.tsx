@@ -27,39 +27,48 @@ export default function DashboardNavbar() {
     <nav className="w-full border-b border-gray-700 bg-gray-900 text-white py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <Link href="/" prefetch className="text-xl font-bold">
-            NerdHaven
+          <Link
+            href="/"
+            prefetch
+            className="text-xl font-bold flex items-center gap-2"
+          >
+            <img
+              src="/images/lifegames-logo.svg"
+              alt="LifeGames"
+              className="h-8"
+            />
+            LifeGames
           </Link>
           <div className="hidden md:flex gap-6">
             <Link
               href="/admin"
               className="text-gray-300 hover:text-white flex items-center gap-2"
             >
-              <LayoutGrid className="h-4 w-4" /> Dashboard
+              <LayoutGrid className="h-4 w-4" /> Painel
             </Link>
             <Link
               href="/admin/products"
               className="text-gray-300 hover:text-white flex items-center gap-2"
             >
-              <Package className="h-4 w-4" /> Products
+              <Package className="h-4 w-4" /> Produtos
             </Link>
             <Link
               href="/admin/categories"
               className="text-gray-300 hover:text-white flex items-center gap-2"
             >
-              <LayoutGrid className="h-4 w-4" /> Categories
+              <LayoutGrid className="h-4 w-4" /> Categorias
             </Link>
             <Link
               href="/admin/orders"
               className="text-gray-300 hover:text-white flex items-center gap-2"
             >
-              <ShoppingCart className="h-4 w-4" /> Orders
+              <ShoppingCart className="h-4 w-4" /> Pedidos
             </Link>
             <Link
               href="/admin/customers"
               className="text-gray-300 hover:text-white flex items-center gap-2"
             >
-              <Users className="h-4 w-4" /> Customers
+              <Users className="h-4 w-4" /> Clientes
             </Link>
           </div>
         </div>
@@ -80,7 +89,7 @@ export default function DashboardNavbar() {
                   router.push("/");
                 }}
               >
-                Sign out
+                Sair
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

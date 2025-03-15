@@ -16,8 +16,17 @@ export default async function Navbar() {
     <nav className="w-full bg-gray-900 py-4 text-white sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Link href="/" prefetch className="text-xl font-bold">
-            NerdHaven
+          <Link
+            href="/"
+            prefetch
+            className="text-xl font-bold flex items-center gap-2"
+          >
+            <img
+              src="/images/lifegames-logo.svg"
+              alt="LifeGames"
+              className="h-8"
+            />
+            LifeGames
           </Link>
         </div>
 
@@ -26,26 +35,26 @@ export default async function Navbar() {
             href="/category/games"
             className="text-white hover:text-purple-400"
           >
-            Games
+            Jogos
           </Link>
           <Link
             href="/category/collectibles"
             className="text-white hover:text-purple-400"
           >
-            Collectibles
+            Colecionáveis
           </Link>
           <Link
             href="/category/apparel"
             className="text-white hover:text-purple-400"
           >
-            Apparel
+            Vestuário
           </Link>
         </div>
 
         <div className="relative hidden md:block flex-1 mx-8 max-w-md">
           <Input
             type="search"
-            placeholder="Search for products..."
+            placeholder="Buscar produtos..."
             className="w-full bg-gray-800 border-gray-700 text-white pr-10"
           />
           <Search className="h-4 w-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -81,15 +90,15 @@ export default async function Navbar() {
               <div className="hidden md:flex gap-4 items-center">
                 <Link href="/sign-in">
                   <Button
-                    variant="ghost"
-                    className="text-white hover:text-purple-400"
+                    variant="outline"
+                    className="bg-blue-600 text-white border-blue-500 hover:bg-white hover:text-purple-600"
                   >
-                    Sign In
+                    Entrar
                   </Button>
                 </Link>
                 <Link href="/sign-up">
-                  <Button className="bg-purple-600 hover:bg-purple-700 text-white">
-                    Sign Up
+                  <Button className="bg-purple-600 hover:bg-white hover:text-purple-600 text-white border border-purple-600">
+                    Cadastrar
                   </Button>
                 </Link>
               </div>
